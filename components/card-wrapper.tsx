@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import {
   Card,
@@ -11,6 +12,8 @@ import type { Product } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import { Button } from "./ui/button";
 
 type CardWrapperProps = Product & {
   className?: string;
@@ -23,34 +26,47 @@ const CardWrapper: FC<CardWrapperProps> = ({
   image,
   price,
   rating,
+  category,
   className,
 }) => {
+  const pathName = usePathname();
+
+  const addProductToCart = () => {
+    console.log("**** Product added to cart");
+  };
+
   return (
-    <Link href={`/products/${id}`} className={cn(className)}>
-      <Card className={cn("flex flex-col h-full gap-2 w-full")}>
-        <CardHeader>
-          <Image src={image!} alt={title!} width={55} height={55} />
-        </CardHeader>
-        <CardContent className="flex flex-col gap-2 h-full">
-          <CardTitle>{title}</CardTitle>
-          {description ?? <CardDescription>{description}</CardDescription>}
-        </CardContent>
-        <CardFooter>
-          <div className="flex flex-col w-full justify-between items-center lg:flex-row lg:space-x-2">
-            <div className="flex w-full justify-between items-center space-x-2">
-              <p className="text-md font-semibold">Price:</p>
-              <p className="text-md font-semibold">${price}</p>
-            </div>
-            <div className="flex w-full justify-between items-center space-x-2">
-              <p className="text-md font-semibold">Reviews:</p>
-              {/* TODO: Convert this to stars component */}
-              <p>{rating?.rate}</p>
-              <p>({rating?.count})</p>
-            </div>
+    <Card className={cn("flex flex-col h-full gap-2 w-full", className)}>
+      <CardHeader>
+        <Image src={image!} alt={title!} width={100} height={55} />
+      </CardHeader>
+      <CardContent className="flex flex-col gap-2 h-full">
+        <CardTitle
+          className={cn({ "text-3xl": pathName === `/products/${id}` })}
+        >
+          <Link href={`/products/${id}`}>{title}</Link>
+        </CardTitle>
+        {description ?? <CardDescription>{description}</CardDescription>}
+        {category ?? <p>{category}</p>}
+      </CardContent>
+      <CardFooter className="flex flex-col space-y-3">
+        <div className="flex flex-col w-full justify-between items-center lg:flex-row lg:space-x-2">
+          <div className="flex w-full justify-between items-center space-x-2">
+            <p className="text-md font-semibold">Price:</p>
+            <p className="text-md font-semibold">${price}</p>
           </div>
-        </CardFooter>
-      </Card>
-    </Link>
+          <div className="flex w-full justify-between items-center space-x-2">
+            <p className="text-md font-semibold">Reviews:</p>
+            {/* TODO: Convert this to stars component */}
+            <p>{rating?.rate}</p>
+            <p>({rating?.count})</p>
+          </div>
+        </div>
+        <Button className="self-end" onClick={addProductToCart}>
+          Add to cart
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 

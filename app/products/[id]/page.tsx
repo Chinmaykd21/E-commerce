@@ -18,7 +18,7 @@ const Product = async ({ params }: { params: { id: string } }) => {
         price={product.price}
         title={product.title}
         rating={product.rating}
-        className="flex p-8 w-1/2"
+        className="flex p-8 h-[650px]"
       />
     </>
   );
