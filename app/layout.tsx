@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("min-h-screen p-8", inter.className)}>
+      <body className={cn("min-h-screen", inter.className)}>
         <MainNav />
         {children}
       </body>
