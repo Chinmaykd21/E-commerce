@@ -1,11 +1,11 @@
 import SearchProduct from "./search-product";
-import ShoppingCart from "./shopping-cart";
+import ShoppingCartButton from "./shopping-cart";
 
 const MainNav = () => {
   return (
     <section className="flex justify-between items-center mb-5">
       <SearchProduct />
-      <ShoppingCart />
+      <ShoppingCartButton />
     </section>
   );
 };

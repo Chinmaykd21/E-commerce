@@ -1,7 +1,14 @@
-import React from "react";
+import { Button } from "./ui/button";
+import { ShoppingCart } from "lucide-react";
 
-const ShoppingCart = () => {
-  return <div>Shopping Cart</div>;
+const ShoppingCartButton = () => {
+  return (
+    <section>
+      <Button variant="secondary">
+        <ShoppingCart />
+      </Button>
+    </section>
+  );
 };
 
-export default ShoppingCart;
+export default ShoppingCartButton;
