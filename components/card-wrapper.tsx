@@ -10,18 +10,24 @@ import {
 import type { Product } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-const CardWrapper: FC<Product> = ({
+type CardWrapperProps = Product & {
+  className?: string;
+};
+
+const CardWrapper: FC<CardWrapperProps> = ({
   id,
   title,
   description,
   image,
   price,
   rating,
+  className,
 }) => {
   return (
-    <Link href={`/product/${id}`}>
-      <Card className="flex flex-col h-full gap-2 w-full">
+    <Link href={`/products/${id}`} className={cn(className)}>
+      <Card className={cn("flex flex-col h-full gap-2 w-full")}>
         <CardHeader className="h-[150px]">
           <Image src={image!} alt={title!} width={55} height={55} />
         </CardHeader>

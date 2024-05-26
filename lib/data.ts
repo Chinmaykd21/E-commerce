@@ -29,3 +29,20 @@ export const getProducts = async () => {
     data,
   };
 };
+
+// TODO: Rate limit retries
+// Update return type on function
+export const getProduct = async (id: string) => {
+  const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+  const data = await response.json();
+
+  if (!data) {
+    return {
+      error: "Something went wrong!",
+    };
+  }
+
+  return {
+    data,
+  };
+};
