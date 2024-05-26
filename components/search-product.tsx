@@ -48,7 +48,7 @@ const SearchProduct = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSearchQuerySubmit)}
-          className="flex items-center space-x-2 "
+          className="flex items-center space-x-2"
         >
           <FormField
             control={form.control}

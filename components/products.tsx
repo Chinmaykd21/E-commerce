@@ -8,7 +8,7 @@ export type ProductsProps = {
 
 const Products: FC<ProductsProps> = ({ products }) => {
   return (
-    <section className="grid grid-cols-4 gap-4 items-center">
+    <section className="grid grid-cols-1 gap-4 items-center sm:grid-cols-3 xl:grid-cols-4">
       {products?.map((product) => {
         return (
           <CardWrapper
@@ -21,6 +21,7 @@ const Products: FC<ProductsProps> = ({ products }) => {
               count: product.rating?.count,
               rate: product.rating?.rate,
             }}
+            className="h-full"
           />
         );
       })}
