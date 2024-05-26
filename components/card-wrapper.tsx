@@ -7,44 +7,30 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import type { Product } from "@/lib/data";
+import Image from "next/image";
 
-export type Rating = {
-  rate: number;
-  count: number;
-};
-
-export type CardWrapperProps = {
-  title: string;
-  price: number;
-  description: string;
-  category?: string;
-  image?: string;
-  rating: Rating;
-};
-
-const CardWrapper: FC<CardWrapperProps> = ({
+const CardWrapper: FC<Product> = ({
   title,
   description,
+  image,
   price,
   rating,
 }) => {
   return (
-    <Card>
-      <CardHeader>
-        <p>Card Image</p>
-        {/* <Image></Image> */}
+    <Card className="flex flex-col h-full gap-2 w-full">
+      <CardHeader className="h-[150px]">
+        <Image src={image!} alt={title!} width={55} height={55} />
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-2">
         <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        {description ?? <CardDescription>{description}</CardDescription>}
       </CardContent>
-      <CardFooter>
-        <div className="flex justify-between items-center">
-          <p>{price}</p>
-          <div className="flex justify-between items-center">
-            <p>{rating.rate}</p>
-            <p>{rating.count}</p>
-          </div>
+      <CardFooter className="flex justify-between items-center">
+        <p>{price}</p>
+        <div className="flex justify-between items-center gap-2">
+          <p>{rating?.rate}</p>
+          <p>{rating?.count}</p>
         </div>
       </CardFooter>
     </Card>

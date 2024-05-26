@@ -7,17 +7,17 @@ const Products = async () => {
   if (error) return null;
 
   return (
-    <section className="grid grid-cols-4 gap-4 h-full items-center">
+    <section className="grid grid-cols-4 gap-4 items-center">
       {products?.map((product) => {
         return (
           <CardWrapper
             key={product.id}
+            image={product.image}
             title={product.title}
-            description={product.description}
             price={product.price}
             rating={{
-              count: product.rating.count,
-              rate: product.rating.rate,
+              count: product.rating?.count,
+              rate: product.rating?.rate,
             }}
           />
         );
