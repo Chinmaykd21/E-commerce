@@ -36,10 +36,17 @@ const CardWrapper: FC<CardWrapperProps> = ({
           {description ?? <CardDescription>{description}</CardDescription>}
         </CardContent>
         <CardFooter className="flex justify-between items-center">
-          <p>{price}</p>
-          <div className="flex justify-between items-center space-x-2">
-            <p>{rating?.rate}</p>
-            <p>{rating?.count}</p>
+          <div className="flex w-full justify-between items-center">
+            <div className="flex justify-between items-center space-x-2">
+              <p className="text-md font-semibold">Price:</p>
+              <p className="text-md font-semibold">${price}</p>
+            </div>
+            <div className="flex justify-between items-center space-x-2">
+              <p className="text-md font-semibold">Reviews:</p>
+              {/* TODO: Convert this to stars component */}
+              <p>{rating?.rate}</p>
+              <p>({rating?.count})</p>
+            </div>
           </div>
         </CardFooter>
       </Card>
