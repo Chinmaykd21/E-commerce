@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "./ui/button";
 import { ShoppingCart } from "lucide-react";
 import {
@@ -6,8 +7,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { useCartContext } from "@/context/cart-provider";
 
 const ShoppingCartButton = () => {
+  const { cart } = useCartContext();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -17,13 +20,7 @@ const ShoppingCartButton = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem>
-          <p>Some Random Content</p>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <p>Some Random Content</p>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <p>Some Random Content</p>
+          {cart.length === 0 ? "Cart is empty" : null}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

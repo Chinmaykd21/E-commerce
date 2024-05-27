@@ -1,9 +1,10 @@
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/context/theme-provider";
 import MainNav from "@/components/main-nav";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { CartProvier } from "@/context/cart-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,8 +26,10 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          <MainNav />
-          {children}
+          <CartProvier>
+            <MainNav />
+            {children}
+          </CartProvier>
         </ThemeProvider>
       </body>
     </html>
