@@ -14,6 +14,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
+import { useCartContext } from "@/context/cart-provider";
 
 type CardWrapperProps = Product & {
   className?: string;
@@ -30,9 +31,30 @@ const CardWrapper: FC<CardWrapperProps> = ({
   className,
 }) => {
   const pathName = usePathname();
+  const { cart, setCart } = useCartContext();
 
   const addProductToCart = () => {
-    console.log("**** Product added to cart");
+    const productToAdd = {
+      id,
+      title,
+      description,
+      image,
+      price,
+      rating,
+      category,
+    };
+    const newCart = [...cart];
+    const isPresent = newCart.find((product) => product.id === productToAdd.id);
+    if (isPresent) {
+      newCart.map((product) => {
+        return product.id === productToAdd.id
+          ? { ...product, quantity: (product.quantity as number) + 1 }
+          : product;
+      });
+      setCart(newCart);
+    } else {
+      setCart([...newCart, { ...productToAdd }]);
+    }
   };
 
   return (

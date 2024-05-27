@@ -22,6 +22,13 @@ const ShoppingCartButton = () => {
         <DropdownMenuItem>
           {cart.length === 0 ? "Cart is empty" : null}
         </DropdownMenuItem>
+        {cart.map((product) => {
+          return (
+            <DropdownMenuItem key={product.id}>
+              {product.title}
+            </DropdownMenuItem>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );

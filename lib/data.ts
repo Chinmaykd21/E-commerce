@@ -12,6 +12,7 @@ export type Product = {
   category?: string;
   image?: string;
   rating?: Rating;
+  quantity?: number;
 };
 
 // TODO: Rate limit retries
