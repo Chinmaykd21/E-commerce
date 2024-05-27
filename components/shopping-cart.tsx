@@ -8,9 +8,10 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { useCartContext } from "@/context/cart-provider";
+import CartWrapper from "./cart-wrapper";
 
 const ShoppingCartButton = () => {
-  const { cart } = useCartContext();
+  const { cart, setCart } = useCartContext();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -19,16 +20,28 @@ const ShoppingCartButton = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem>
-          {cart.length === 0 ? "Cart is empty" : null}
-        </DropdownMenuItem>
+        {cart.length === 0 ? (
+          <DropdownMenuItem>
+            <CartWrapper title="Cart is empty" clasName="p-8 w-full" />
+          </DropdownMenuItem>
+        ) : null}
         {cart.map((product) => {
           return (
             <DropdownMenuItem key={product.id}>
-              {product.title}
+              <CartWrapper
+                title={product.title as string}
+                clasName="p-8 w-full"
+              />
             </DropdownMenuItem>
           );
         })}
+        {cart.length !== 0 ?? (
+          <DropdownMenuItem>
+            <Button className="w-full" onClick={() => setCart([])}>
+              Clear Cart
+            </Button>
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
