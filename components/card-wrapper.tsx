@@ -38,7 +38,14 @@ const CardWrapper: FC<CardWrapperProps> = ({
   return (
     <Card className={cn("flex flex-col h-full gap-2 w-full", className)}>
       <CardHeader>
-        <Image src={image!} alt={title!} width={100} height={55} />
+        <Image
+          src={image!}
+          alt={title!}
+          width={100}
+          height={55}
+          priority={false}
+          className="w-auto h-[250px]"
+        />
       </CardHeader>
       <CardContent className="flex flex-col gap-2 h-full">
         <CardTitle

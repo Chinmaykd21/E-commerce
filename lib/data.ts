@@ -46,3 +46,21 @@ export const getProduct = async (id: string) => {
     data,
   };
 };
+
+export const filterProductByName = async (searchQuery: string) => {
+  const { error, data: products } = await getProducts();
+
+  if (error) {
+    return {
+      error: "Something went wrong!",
+    };
+  }
+
+  const filteredProducts = products?.filter((product) =>
+    product.title?.includes(searchQuery)
+  );
+
+  return {
+    data: filteredProducts,
+  };
+};

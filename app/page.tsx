@@ -1,8 +1,14 @@
 import Products from "@/components/products";
-import { getProducts } from "@/lib/data";
+import { filterProductByName, getProducts } from "@/lib/data";
 
-export default async function Home() {
-  const { error, data: products } = await getProducts();
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { search: string };
+}) {
+  const { error, data: products } = searchParams?.search
+    ? await filterProductByName(searchParams.search)
+    : await getProducts();
 
   // TODO:  handle errors better
   if (error || !products) return null;

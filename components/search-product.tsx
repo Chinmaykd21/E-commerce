@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -23,7 +23,8 @@ const formSchema = z.object({
 
 const SearchProduct = () => {
   const searchParams = useSearchParams();
-  const router = useRouter();
+  const pathName = usePathname();
+  const { replace } = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,8 +40,11 @@ const SearchProduct = () => {
       return;
     }
     const { input } = validateSearchQuery.data;
-    // Search Functionality is not yet implemented
-    console.log("***** input", InputEvent);
+    const params = new URLSearchParams(searchParams);
+    if (input) params.set("search", input);
+    else params.delete("search");
+
+    replace(`${pathName}?${params.toString()}`);
   };
 
   return (
