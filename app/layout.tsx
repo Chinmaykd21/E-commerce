@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
 import MainNav from "@/components/main-nav";
+import { Inter } from "next/font/google";
+import type { Metadata } from "next";
+import { cn } from "@/lib/utils";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +20,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn("min-h-screen", inter.className)}>
-        <MainNav />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          disableTransitionOnChange
+        >
+          <MainNav />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
