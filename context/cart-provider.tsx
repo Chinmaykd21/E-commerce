@@ -13,6 +13,8 @@ import {
 export type CartContextProps = {
   cart: Product[];
   setCart: Dispatch<SetStateAction<Product[]>>;
+  addProductToCart: (productToAdd: Product) => void;
+  clearCart: () => void;
 };
 
 export const CartContext = createContext<CartContextProps | null>(null);
@@ -24,11 +26,32 @@ export type CartProviderProps = {
 export const CartProvier: FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<Product[]>([]);
 
+  const addProductToCart = (productToAdd: Product) => {
+    const newCart = [...cart];
+    const isPresent = newCart.find((product) => product.id === productToAdd.id);
+    if (isPresent) {
+      newCart.map((product) => {
+        return product.id === productToAdd.id
+          ? { ...product, quantity: (product.quantity as number) + 1 }
+          : product;
+      });
+      setCart(newCart);
+    } else {
+      setCart([...newCart, { ...productToAdd }]);
+    }
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
         cart,
         setCart,
+        addProductToCart,
+        clearCart,
       }}
     >
       {children}

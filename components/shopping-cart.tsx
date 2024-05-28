@@ -11,7 +11,7 @@ import { useCartContext } from "@/context/cart-provider";
 import CartWrapper from "./cart-wrapper";
 
 const ShoppingCartButton = () => {
-  const { cart, setCart } = useCartContext();
+  const { cart, clearCart } = useCartContext();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -24,7 +24,13 @@ const ShoppingCartButton = () => {
           <DropdownMenuItem>
             <CartWrapper title="Cart is empty" clasName="p-8 w-full" />
           </DropdownMenuItem>
-        ) : null}
+        ) : (
+          <DropdownMenuItem>
+            <Button className="w-full" onClick={() => clearCart()}>
+              Clear Cart
+            </Button>
+          </DropdownMenuItem>
+        )}
         {cart.map((product) => {
           return (
             <DropdownMenuItem key={product.id}>
@@ -35,13 +41,6 @@ const ShoppingCartButton = () => {
             </DropdownMenuItem>
           );
         })}
-        {cart.length !== 0 ?? (
-          <DropdownMenuItem>
-            <Button className="w-full" onClick={() => setCart([])}>
-              Clear Cart
-            </Button>
-          </DropdownMenuItem>
-        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

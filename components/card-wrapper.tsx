@@ -31,9 +31,9 @@ const CardWrapper: FC<CardWrapperProps> = ({
   className,
 }) => {
   const pathName = usePathname();
-  const { cart, setCart } = useCartContext();
+  const { cart, addProductToCart, setCart } = useCartContext();
 
-  const addProductToCart = () => {
+  const handleButtonClick = () => {
     const productToAdd = {
       id,
       title,
@@ -43,18 +43,7 @@ const CardWrapper: FC<CardWrapperProps> = ({
       rating,
       category,
     };
-    const newCart = [...cart];
-    const isPresent = newCart.find((product) => product.id === productToAdd.id);
-    if (isPresent) {
-      newCart.map((product) => {
-        return product.id === productToAdd.id
-          ? { ...product, quantity: (product.quantity as number) + 1 }
-          : product;
-      });
-      setCart(newCart);
-    } else {
-      setCart([...newCart, { ...productToAdd }]);
-    }
+    addProductToCart(productToAdd);
   };
 
   return (
@@ -91,7 +80,7 @@ const CardWrapper: FC<CardWrapperProps> = ({
             <p>({rating?.count})</p>
           </div>
         </div>
-        <Button className="self-end" onClick={addProductToCart}>
+        <Button className="self-end" onClick={handleButtonClick}>
           Add to cart
         </Button>
       </CardFooter>
