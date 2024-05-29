@@ -11,4 +11,5 @@
   - persist cart state when browser is refreshed
   - pagination (optional)
   - rate limiting (optional)
-  - state management with zustand
+  - learning global state management with react context api
+  - converting global state to state management with zustand

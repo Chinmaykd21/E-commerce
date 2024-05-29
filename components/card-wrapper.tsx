@@ -14,7 +14,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
-import { useCartContext } from "@/context/cart-provider";
+import useCartStore from "@/store/cart-store";
 
 type CardWrapperProps = Product & {
   className?: string;
@@ -31,10 +31,9 @@ const CardWrapper: FC<CardWrapperProps> = ({
   className,
 }) => {
   const pathName = usePathname();
-  const { cart, addProductToCart, setCart } = useCartContext();
-
+  const { cart, addProduct, updateQuantity } = useCartStore();
   const handleButtonClick = () => {
-    const productToAdd = {
+    const product = {
       id,
       title,
       description,
@@ -43,7 +42,12 @@ const CardWrapper: FC<CardWrapperProps> = ({
       rating,
       category,
     };
-    addProductToCart(productToAdd);
+    addProduct(product);
+  };
+
+  const handleIncreaseItemQuantity = () => {
+    // increaseItemQuantity(id);
+    console.log("****", cart);
   };
 
   return (
@@ -64,8 +68,8 @@ const CardWrapper: FC<CardWrapperProps> = ({
         >
           <Link href={`/products/${id}`}>{title}</Link>
         </CardTitle>
-        {description ?? <CardDescription>{description}</CardDescription>}
-        {category ?? <p>{category}</p>}
+        {description && <CardDescription>{description}</CardDescription>}
+        {category && <p>{category}</p>}
       </CardContent>
       <CardFooter className="flex flex-col space-y-3">
         <div className="flex flex-col w-full justify-between items-center lg:flex-row lg:space-x-2">
@@ -80,9 +84,26 @@ const CardWrapper: FC<CardWrapperProps> = ({
             <p>({rating?.count})</p>
           </div>
         </div>
-        <Button className="self-end" onClick={handleButtonClick}>
-          Add to cart
-        </Button>
+        {cart.length === 0 && (
+          <Button className="self-end" onClick={handleButtonClick}>
+            Add to cart
+          </Button>
+        )}
+        {cart.length !== 0 && (
+          <div className="flex items-center justify-evenly w-full">
+            <Button
+              size="icon"
+              onClick={() => console.log("***** count decreased")}
+              disabled={cart.length === 0}
+            >
+              -
+            </Button>
+            <p>{cart.length}</p>
+            <Button size="icon" onClick={handleIncreaseItemQuantity}>
+              +
+            </Button>
+          </div>
+        )}
       </CardFooter>
     </Card>
   );

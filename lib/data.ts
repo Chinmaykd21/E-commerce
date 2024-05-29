@@ -5,13 +5,13 @@ export type Rating = {
 
 // TODO: Update type so that at least some properties are required
 export type Product = {
-  id?: number;
-  title?: string;
-  price?: number;
+  id: number;
+  title: string;
+  price: number;
   description?: string;
   category?: string;
-  image?: string;
-  rating?: Rating;
+  image: string;
+  rating: Rating;
   quantity?: number;
 };
 

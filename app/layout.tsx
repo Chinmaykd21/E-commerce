@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
 import "./globals.css";
-import { CartProvier } from "@/context/cart-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,10 +25,8 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          <CartProvier>
-            <MainNav />
-            {children}
-          </CartProvier>
+          <MainNav />
+          {children}
         </ThemeProvider>
       </body>
     </html>
