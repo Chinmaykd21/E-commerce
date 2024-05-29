@@ -18,7 +18,7 @@ const useCartStore = create<CartState>((set, get) => ({
         return {
           cart: state.cart.map((item) =>
             item.id === product.id
-              ? { ...item, quantity: (item.quantity as number) + 1 }
+              ? { ...item, quantity: (item.quantity ?? 0) + 1 }
               : item
           ),
         };
@@ -31,10 +31,15 @@ const useCartStore = create<CartState>((set, get) => ({
     return product ? product.quantity : undefined;
   },
   removeProduct: (productId) =>
-    set((state) => ({
-      cart: state.cart.filter((item) => item.id !== productId),
-    })),
-
+    set((state) => {
+      return {
+        cart: state.cart.map((item) =>
+          item.id === productId
+            ? { ...item, quantity: (item.quantity ?? 0) - 1 }
+            : item
+        ),
+      };
+    }),
   clearCart: () => set({ cart: [] }),
 }));
 

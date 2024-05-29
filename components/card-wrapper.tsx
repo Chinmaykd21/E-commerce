@@ -31,9 +31,9 @@ const CardWrapper: FC<CardWrapperProps> = ({
   className,
 }) => {
   const pathName = usePathname();
-  const { getProductQuantity, addProduct } = useCartStore();
+  const { getProductQuantity, addProduct, removeProduct } = useCartStore();
   const quantity = getProductQuantity(id);
-  const handleButtonClick = () => {
+  const handleAddButtonClick = () => {
     const product = {
       id,
       title,
@@ -81,17 +81,17 @@ const CardWrapper: FC<CardWrapperProps> = ({
           </div>
         </div>
         {!quantity && (
-          <Button className="w-full" onClick={handleButtonClick}>
+          <Button className="w-full" onClick={handleAddButtonClick}>
             Add to cart
           </Button>
         )}
-        {quantity && quantity > 0 && (
+        {quantity && quantity > 0 ? (
           <div className="flex justify-around items-center gap-3">
-            <Button>-</Button>
+            <Button onClick={() => removeProduct(id)}>-</Button>
             {quantity}
-            <Button onClick={handleButtonClick}>+</Button>
+            <Button onClick={handleAddButtonClick}>+</Button>
           </div>
-        )}
+        ) : null}
       </CardFooter>
     </Card>
   );
