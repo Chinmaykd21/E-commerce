@@ -21,6 +21,7 @@ const Products: FC<ProductsProps> = ({ products }) => {
               count: product.rating?.count,
               rate: product.rating?.rate,
             }}
+            quantity={product.quantity ? product.quantity : 0}
             className="h-full"
           />
         );

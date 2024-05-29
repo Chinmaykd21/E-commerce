@@ -31,7 +31,8 @@ const CardWrapper: FC<CardWrapperProps> = ({
   className,
 }) => {
   const pathName = usePathname();
-  const { cart, addProduct, updateQuantity } = useCartStore();
+  const { getProductQuantity, addProduct } = useCartStore();
+  const quantity = getProductQuantity(id);
   const handleButtonClick = () => {
     const product = {
       id,
@@ -43,11 +44,6 @@ const CardWrapper: FC<CardWrapperProps> = ({
       category,
     };
     addProduct(product);
-  };
-
-  const handleIncreaseItemQuantity = () => {
-    // increaseItemQuantity(id);
-    console.log("****", cart);
   };
 
   return (
@@ -84,24 +80,16 @@ const CardWrapper: FC<CardWrapperProps> = ({
             <p>({rating?.count})</p>
           </div>
         </div>
-        {cart.length === 0 && (
-          <Button className="self-end" onClick={handleButtonClick}>
+        {!quantity && (
+          <Button className="w-full" onClick={handleButtonClick}>
             Add to cart
           </Button>
         )}
-        {cart.length !== 0 && (
-          <div className="flex items-center justify-evenly w-full">
-            <Button
-              size="icon"
-              onClick={() => console.log("***** count decreased")}
-              disabled={cart.length === 0}
-            >
-              -
-            </Button>
-            <p>{cart.length}</p>
-            <Button size="icon" onClick={handleIncreaseItemQuantity}>
-              +
-            </Button>
+        {quantity && quantity > 0 && (
+          <div className="flex justify-around items-center gap-3">
+            <Button>-</Button>
+            {quantity}
+            <Button onClick={handleButtonClick}>+</Button>
           </div>
         )}
       </CardFooter>
