@@ -55,12 +55,18 @@ const CardWrapper: FC<CardWrapperProps> = ({
           width={100}
           height={55}
           priority={false}
-          className="w-auto h-[250px]"
+          className={cn("w-auto h-[250px]", {
+            "w-[650px]": pathName === `/products/${id}`,
+          })}
         />
       </CardHeader>
-      <CardContent className="flex flex-col gap-2 h-full">
+      <CardContent
+        className={cn("flex flex-col gap-2 h-full", {
+          "w-1/2": pathName === `/products/${id}`,
+        })}
+      >
         <CardTitle
-          className={cn({ "text-3xl": pathName === `/products/${id}` })}
+          className={cn({ "text-2xl": pathName === `/products/${id}` })}
         >
           <Link href={`/products/${id}`}>{title}</Link>
         </CardTitle>

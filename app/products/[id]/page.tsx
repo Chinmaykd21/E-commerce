@@ -1,5 +1,7 @@
 import CardWrapper from "@/components/card-wrapper";
 import { getProduct, type Product } from "@/lib/data";
+import { ArrowBigLeft, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 const Product = async ({ params }: { params: { id: string } }) => {
   if (!params?.id) return null;
@@ -9,7 +11,13 @@ const Product = async ({ params }: { params: { id: string } }) => {
   if (error || !product) return null;
 
   return (
-    <>
+    <section className="px-8 pt-0">
+      <div className="mb-5">
+        <Link href="/" className="flex gap-x-3">
+          <ArrowLeft />
+          Back to products
+        </Link>
+      </div>
       <CardWrapper
         id={product.id}
         category={product.category}
@@ -18,9 +26,9 @@ const Product = async ({ params }: { params: { id: string } }) => {
         price={product.price}
         title={product.title}
         rating={product.rating}
-        className="flex p-8 h-[650px]"
+        className="p-8 md:flex-row"
       />
-    </>
+    </section>
   );
 };
 
