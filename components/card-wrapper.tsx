@@ -66,7 +66,9 @@ const CardWrapper: FC<CardWrapperProps> = ({
         })}
       >
         <CardTitle
-          className={cn({ "text-2xl": pathName === `/products/${id}` })}
+          className={cn({
+            "text-2xl pointer-events-none": pathName === `/products/${id}`,
+          })}
         >
           <Link href={`/products/${id}`}>{title}</Link>
         </CardTitle>
