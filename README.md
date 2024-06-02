@@ -10,7 +10,6 @@
   - change quantity of the product in the cart or while adding to cart ✅
   - converting global state to state management with zustand ✅
   - persist cart state when browser is refreshed ✅
-  - pagination (optional)
   - rate limiting (optional)
 
 ### Learnings
