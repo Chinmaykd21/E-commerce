@@ -1,5 +1,6 @@
 import Products from "@/components/products";
 import { filterProductByName, getProducts } from "@/lib/data";
+import { notFound } from "next/navigation";
 
 export default async function Home({
   searchParams,
@@ -10,8 +11,13 @@ export default async function Home({
     ? await filterProductByName(searchParams.search)
     : await getProducts();
 
-  // TODO:  handle errors better
-  if (error || !products) return null;
+  if (error) {
+    return notFound();
+  }
+
+  if (!products || products.length === 0) {
+    return null;
+  }
 
   return (
     <main className="px-8">

@@ -19,6 +19,11 @@ export type Product = {
 // Update return type on function
 export const getProducts = async () => {
   const response = await fetch("https://fakestoreapi.com/products?limit=8");
+  if (!response.ok) {
+    return {
+      error: "Something went wrong while fetching data",
+    };
+  }
   const data: Product[] = await response.json();
 
   if (!data)
@@ -35,6 +40,11 @@ export const getProducts = async () => {
 // Update return type on function
 export const getProduct = async (id: string) => {
   const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+  if (!response.ok) {
+    return {
+      error: "Something went wrong while fetching data",
+    };
+  }
   const data = await response.json();
 
   if (!data) {
