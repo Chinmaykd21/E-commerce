@@ -56,13 +56,13 @@ const CardWrapper: FC<CardWrapperProps> = ({
           height={55}
           priority={false}
           className={cn("w-auto h-[250px]", {
-            "w-[650px]": pathName === `/products/${id}`,
+            "w-[350px]": pathName === `/products/${id}`,
           })}
         />
       </CardHeader>
       <CardContent
         className={cn("flex flex-col gap-2 h-full", {
-          "w-1/2": pathName === `/products/${id}`,
+          "w-1/3": pathName === `/products/${id}`,
         })}
       >
         <CardTitle
@@ -73,13 +73,35 @@ const CardWrapper: FC<CardWrapperProps> = ({
         {description && <CardDescription>{description}</CardDescription>}
         {category && <p>{category}</p>}
       </CardContent>
-      <CardFooter className="flex flex-col space-y-3">
-        <div className="flex flex-col w-full justify-between items-center lg:flex-row lg:space-x-2">
-          <div className="flex w-full justify-between items-center space-x-2">
+      <CardFooter
+        className={cn("flex flex-col space-y-3", {
+          "w-2/3": pathName === `/products/${id}`,
+        })}
+      >
+        <div
+          className={cn("flex flex-col w-full justify-between items-center", {
+            "space-y-4": pathName === `/products/${id}`,
+          })}
+        >
+          <div
+            className={cn(
+              "flex w-full justify-between items-center space-x-2",
+              {
+                "text-xl": pathName === `/products/${id}`,
+              }
+            )}
+          >
             <p className="text-md font-semibold">Price:</p>
             <p className="text-md font-semibold">${price}</p>
           </div>
-          <div className="flex w-full justify-between items-center space-x-2">
+          <div
+            className={cn(
+              "flex w-full justify-between items-center space-x-2",
+              {
+                "text-xl": pathName === `/products/${id}`,
+              }
+            )}
+          >
             <p className="text-md font-semibold">Reviews:</p>
             {/* TODO: Convert this to stars component */}
             <p>{rating?.rate}</p>
