@@ -3,14 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
-import {
-  Form,
-  FormItem,
-  FormLabel,
-  FormField,
-  FormControl,
-  FormMessage,
-} from "./ui/form";
+import { Form, FormItem, FormField, FormControl, FormMessage } from "./ui/form";
 import { z } from "zod";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";

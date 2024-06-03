@@ -3,7 +3,6 @@ export type Rating = {
   count?: number;
 };
 
-// TODO: Update type so that at least some properties are required
 export type Product = {
   id: number;
   title: string;
@@ -15,10 +14,10 @@ export type Product = {
   quantity?: number;
 };
 
-// TODO: Rate limit retries
-// Update return type on function
 export const getProducts = async () => {
-  const response = await fetch("https://fakestoreapi.com/products?limit=8");
+  const response = await fetch("https://fakestoreapi.com/products?limit=8", {
+    signal: AbortSignal.timeout(3000),
+  });
   if (!response.ok) {
     return {
       error: "Something went wrong while fetching data",
@@ -36,10 +35,10 @@ export const getProducts = async () => {
   };
 };
 
-// TODO: Rate limit retries
-// Update return type on function
 export const getProduct = async (id: string) => {
-  const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+  const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+    signal: AbortSignal.timeout(3000),
+  });
   if (!response.ok) {
     return {
       error: "Something went wrong while fetching data",
