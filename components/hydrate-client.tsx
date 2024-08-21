@@ -5,7 +5,19 @@ import { useEffect } from "react";
 
 export const HydrateClient = () => {
   useEffect(() => {
-    useCartStore.persist.rehydrate();
+    const handleStorageUpdate = (event: StorageEvent) => {
+      if (event.key === "cart") {
+        const updatedCart = event.newValue ? JSON.parse(event.newValue) : [];
+        useCartStore.getState().hydrateCart();
+      }
+    };
+    if (typeof window !== "undefined") {
+      window.addEventListener("storage", handleStorageUpdate);
+    }
+
+    return () => {
+      window.removeEventListener("storage", handleStorageUpdate);
+    };
   }, []);
   return null;
 };
