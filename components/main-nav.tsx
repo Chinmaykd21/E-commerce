@@ -5,7 +5,7 @@ import { SearchProductSimpler } from "./search-product-simpler";
 
 const MainNav = () => {
   return (
-    <section className="flex justify-between items-center p-8 mb-5 space-x-2">
+    <section className="flex flex-col-reverse p-8 mb-5 gap-3 lg:justify-between lg:items-center lg:space-x-2">
       {/* TODO: Fallback component here */}
       <Suspense>
         <SearchProductSimpler />

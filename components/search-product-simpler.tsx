@@ -29,8 +29,8 @@ export const SearchProductSimpler = () => {
   const onSearchQuerySubmit = (values: z.infer<typeof formSchema>) => {
     const validateSearchQuery = formSchema.safeParse(values);
     if (validateSearchQuery.error) {
-      // TODO: Handle Error here
-      console.log("There is an error here", validateSearchQuery.error);
+      // TODO: this if loop is not working
+      console.error("There is an error here", validateSearchQuery.error);
       return;
     }
     const { productSearchQuery } = validateSearchQuery.data;
@@ -64,7 +64,7 @@ export const SearchProductSimpler = () => {
           {...register("productSearchQuery")}
           type="text"
         />
-        {currentQuery.length < 0 ? (
+        {currentQuery.length === 0 ? (
           <SearchIcon className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
         ) : (
           <XIcon
