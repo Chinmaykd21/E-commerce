@@ -64,7 +64,7 @@ export const SearchProduct = () => {
           {...register("productSearchQuery")}
           type="text"
         />
-        {currentQuery.length === 0 && (
+        {currentQuery.length > 0 && (
           <XIcon
             onClick={clearInput}
             className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"
