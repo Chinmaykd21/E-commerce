@@ -12,7 +12,7 @@ const formSchema = z.object({
   }),
 });
 
-export const SearchProductSimpler = () => {
+export const SearchProduct = () => {
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const { replace } = useRouter();

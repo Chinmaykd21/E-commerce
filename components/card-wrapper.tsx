@@ -54,9 +54,9 @@ const CardWrapper: FC<CardWrapperProps> = ({
           alt={title!}
           width={350}
           height={250}
-          priority={false}
-          className={cn("bg-cover h-[250px]", {
-            "w-[350px]": pathName === `/products/${id}`,
+          priority={true}
+          className={cn("bg-cover w-auto h-[250px]", {
+            "w-auto": pathName === `/products/${id}`,
           })}
         />
       </CardHeader>
