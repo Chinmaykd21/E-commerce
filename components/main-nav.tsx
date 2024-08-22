@@ -5,7 +5,7 @@ import { ToggleTheme } from "./toggle-theme";
 
 const MainNav = () => {
   return (
-    <section className="flex justify-between items-center p-8 mb-5">
+    <section className="flex justify-between items-center p-8 mb-5 space-x-2">
       {/* TODO: Fallback component here */}
       <Suspense>
         <SearchProduct />

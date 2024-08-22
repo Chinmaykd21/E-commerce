@@ -74,7 +74,7 @@ const CardWrapper: FC<CardWrapperProps> = ({
         </CardTitle>
         {description && <CardDescription>{description}</CardDescription>}
         {category && (
-          <p className="bg-white text-black font-bold rounded-full text-center">
+          <p className="bg-black text-white dark:bg-white dark:text-black font-bold rounded-full text-center">
             {category}
           </p>
         )}
