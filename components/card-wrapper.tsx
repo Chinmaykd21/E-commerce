@@ -62,7 +62,7 @@ const CardWrapper: FC<CardWrapperProps> = ({
       </CardHeader>
       <CardContent
         className={cn("flex flex-col gap-2 h-full", {
-          "w-1/3": pathName === `/products/${id}`,
+          "w-full lg:w-1/3": pathName === `/products/${id}`,
         })}
       >
         <CardTitle
@@ -73,11 +73,15 @@ const CardWrapper: FC<CardWrapperProps> = ({
           <Link href={`/products/${id}`}>{title}</Link>
         </CardTitle>
         {description && <CardDescription>{description}</CardDescription>}
-        {category && <p>{category}</p>}
+        {category && (
+          <p className="bg-white text-black font-bold rounded-full text-center">
+            {category}
+          </p>
+        )}
       </CardContent>
       <CardFooter
         className={cn("flex flex-col space-y-3", {
-          "w-2/3": pathName === `/products/${id}`,
+          "w-full lg:w-2/3": pathName === `/products/${id}`,
         })}
       >
         <div
