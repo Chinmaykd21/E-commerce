@@ -52,10 +52,10 @@ const CardWrapper: FC<CardWrapperProps> = ({
         <Image
           src={image!}
           alt={title!}
-          width={100}
-          height={55}
+          width={350}
+          height={250}
           priority={false}
-          className={cn("w-auto h-[250px]", {
+          className={cn("bg-cover h-[250px]", {
             "w-[350px]": pathName === `/products/${id}`,
           })}
         />

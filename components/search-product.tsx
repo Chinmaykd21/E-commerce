@@ -42,11 +42,11 @@ const SearchProduct = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center w-full">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSearchQuerySubmit)}
-          className="flex items-center space-x-2"
+          className="flex items-center space-x-2 w-full gap-x-2"
         >
           <FormField
             control={form.control}
